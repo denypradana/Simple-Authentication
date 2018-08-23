@@ -10,7 +10,6 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/kataras/go-sessions"
 	"golang.org/x/crypto/bcrypt"
-	// "os"
 )
 
 var db *sql.DB
@@ -51,7 +50,7 @@ func main() {
 
 	defer db.Close()
 
-	fmt.Println("Server running on port :8888")
+	fmt.Println("Server berjalan pada port : 8888")
 	http.ListenAndServe(":8888", nil)
 }
 
