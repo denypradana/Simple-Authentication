@@ -136,7 +136,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	users := QueryUser(username)
 
-	//deskripsi dan compare password
+	//decrypt dan cek password
 	var passwordTes = bcrypt.CompareHashAndPassword([]byte(users.Password), []byte(password))
 
 	if passwordTes == nil {
