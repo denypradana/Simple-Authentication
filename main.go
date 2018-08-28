@@ -15,7 +15,8 @@ import (
 var db *sql.DB
 var err error
 
-type user struct {
+// User mewakili semua informasi mengenai user
+type User struct {
 	ID        int
 	Username  string
 	FirstName string
@@ -66,8 +67,9 @@ func checkErr(w http.ResponseWriter, r *http.Request, err error) bool {
 	return true
 }
 
-func QueryUser(username string) user {
-	var users = user{}
+// QueryUser untuk membaca list user di dalam database
+func QueryUser(username string) User {
+	var users = User{}
 	err = db.QueryRow(`
 		SELECT id, 
 		username, 
@@ -99,7 +101,7 @@ func register(w http.ResponseWriter, r *http.Request) {
 
 	users := QueryUser(username)
 
-	if (user{}) == users {
+	if (User{}) == users {
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 		if len(hashedPassword) != 0 && checkErr(w, r, err) {
