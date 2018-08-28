@@ -140,13 +140,13 @@ func login(w http.ResponseWriter, r *http.Request) {
 	var passwordTes = bcrypt.CompareHashAndPassword([]byte(users.Password), []byte(password))
 
 	if passwordTes == nil {
-		//login success
+		// login berhasil
 		session := sessions.Start(w, r)
 		session.Set("username", users.Username)
 		session.Set("name", users.FirstName)
 		http.Redirect(w, r, "/home", 302)
 	} else {
-		//login failed
+		// login gagal
 		http.Redirect(w, r, "/login", 302)
 	}
 
@@ -154,10 +154,11 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 func home(w http.ResponseWriter, r *http.Request) {
 	session := sessions.Start(w, r)
+	// Jika user belum login maka akan diarahkan ke form login
 	if len(session.GetString("username")) == 0 {
 		http.Redirect(w, r, "/login", 301)
 	}
-
+	// Jika user sudah login, map data pengguna untuk ditampilkan pada halaman Home
 	var data = map[string]string{
 		"username": session.GetString("name"),
 		"message":  "Selamat datang di Go Login !",
