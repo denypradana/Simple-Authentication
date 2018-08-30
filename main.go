@@ -25,7 +25,7 @@ type User struct {
 }
 
 func connectDb() {
-	db, err = sql.Open("mysql", "root:@tcp(192.168.2.201)/go_db")
+	db, err = sql.Open("mysql", "root:@tcp(192.168.2.201:3388)/go_db")
 
 	if err != nil {
 		log.Fatalln(err)
