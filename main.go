@@ -25,7 +25,7 @@ type User struct {
 }
 
 func connectDb() {
-	db, err = sql.Open("mysql", "root:@tcp(192.168.2.201:3388)/go_db")
+	db, err = sql.Open("mysql", "root:@tcp(127.0.0.1)/go_db")
 
 	if err != nil {
 		log.Fatalln(err)
@@ -51,8 +51,9 @@ func main() {
 
 	defer db.Close()
 
-	fmt.Println("Server berjalan pada port : 8888")
-	http.ListenAndServe(":8888", nil)
+	fmt.Println("Go Login Server")
+	fmt.Println("Server berjalan pada port : 80")
+	http.ListenAndServe(":80", nil)
 }
 
 func checkErr(w http.ResponseWriter, r *http.Request, err error) bool {
